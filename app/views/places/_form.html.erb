@@ -1,0 +1,36 @@
+<div data-controller="maps">
+<%= form_with(model: place) do |form| %>
+  <% if place.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(place.errors.count, "error") %> prohibited this place from being saved:</h2>
+
+      <ul>
+        <% place.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+ <div>
+<%= form.label :latitude, style: "display: block" %>
+<%= form.text_field :latitude, data: {"maps-target": "latitude"} %>
+</div>
+
+<div>
+<%= form.label :longitude, style: "display: block" %>
+<%= form.text_field :longitude , data: {"maps-target": "longitude"} %>
+</div>
+
+<div id='searchBoxContainer'>
+<%= form.label :name, style: "display: block" %>
+<%= form.text_field :name, data: {"maps-target": "name"}, id: "searchBox" %>
+</div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+  <div data-maps-target="myMap" style='width: 100vw; height: 100vh;'></div>
+
+<% end %>
+</div>
